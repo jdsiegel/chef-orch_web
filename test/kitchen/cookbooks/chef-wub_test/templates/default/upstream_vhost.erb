@@ -1,0 +1,11 @@
+server {
+  listen       <%= @port %>;
+  server_name  localhost;
+
+  access_log  /home/vagrant/localhost.<%= @port %>.access.log;
+
+  location / {
+    root   <%= @root_path %>;
+    index  index.html index.htm;
+  }
+}
