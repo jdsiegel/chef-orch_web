@@ -33,5 +33,61 @@ module Wub
     end
 
     nginx_site "#{name}"
+
+    if app['ssl']
+      ssl = app['ssl']
+      ssl_key  = ssl['key']
+      ssl_cert = ssl['cert']
+
+      raise "App '#{name}' requires ssl key"  unless ssl_key
+      raise "App '#{name}' requires ssl cert" unless ssl_cert
+
+      ssl_port      = ssl['port'] || 443
+      ssl_name      = "#{name}_ssl"
+      ssl_dir       = "#{node['nginx']['dir']}/ssl"
+      ssl_key_file  = "#{ssl_dir}/#{name}.key"
+      ssl_cert_file = "#{ssl_dir}/#{name}.cert"
+
+      directory ssl_dir do
+        owner "root"
+        mode  "0755"
+      end
+
+      file ssl_key_file do
+        owner   "root"
+        mode    "0644"
+        content ssl_key
+
+        notifies     :reload, "service[nginx]"
+      end
+
+      file ssl_cert_file do
+        owner   "root"
+        mode    "0644"
+        content ssl_cert
+
+        notifies     :reload, "service[nginx]"
+      end
+
+      template "#{node['nginx']['dir']}/sites-available/#{ssl_name}" do
+        source       "nginx_vhost.erb"
+        owner        "root"
+        mode         "0644"
+        variables({
+          name:      ssl_name,
+          servers:   servers,
+          hostname:  hostname,
+          port:      ssl_port,
+          root_path: root_path,
+          log_path:  log_path,
+          ssl_key:   ssl_key_file,
+          ssl_cert:  ssl_cert_file
+        })
+
+        notifies     :reload, "service[nginx]"
+      end
+
+      nginx_site "#{ssl_name}"
+    end
   end
 end

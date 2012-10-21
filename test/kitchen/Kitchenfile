@@ -7,4 +7,5 @@ end
 
 cookbook "chef-wub" do
   configuration "default"
+  configuration "ssl"
 end
