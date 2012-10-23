@@ -1,7 +1,7 @@
 Description
 ===========
 
-Wub is a simple cookbook for setting up nginx as a reverse proxy for one
+orch\_web is a simple cookbook for setting up nginx as a reverse proxy for one
 or more upstream rails/rack servers. It uses the 'nginx::source' recipes from the
 [nginx](https://github.com/opscode-cookbooks/nginx) cookbook for
 configuration.
@@ -20,7 +20,7 @@ Assumptions
 * You are proxying rails/rack apps via unicorn, puma, or some other
   server. Passenger is not supported.
 * Your deploy process will place all static assets in the app's root
-  path on the node that includes the wub recipe
+  path on the node that includes the orch\_web recipe
 
 Platform
 --------
@@ -47,27 +47,27 @@ A list of hashes describing the set of virtual hosts for each app. Each hash acc
 following:
 
 * name - the name of the rails/rack app (required)
-* root_path - the path of the app's public directory. It's assumed the app
+* root\_path - the path of the app's public directory. It's assumed the app
   static assets are deployed here (required)
 * servers - a list of upstream server addresses (IP4/6 or unix socket)
 * port - the virtual host's listening port (default: 80)
-* hostname - the virtual host's hostname (default: _)
+* hostname - the virtual host's hostname (default: \_)
 
 ## External attribute changes
 
 This cookpage makes opinionated changes to the nginx default attributes.
-You can still overrule wub's decisions by either the nginx attributes at
-the node or override levels.
+You can still change orch\_web's decisions by setting the nginx attributes at
+either the node or override levels.
 
-### default_site_enabled (nginx)
+### default\_site\_enabled (nginx)
 
 This is set to false
 
 Usage
 =====
 
-* Add recipe[wub] to the run_list for your proxy node and set the the
-  apps attribute
+* Add recipe[orch\_web] to the run list for your proxy node and set the the
+  apps attribute.
 
 License and Author
 ==================

@@ -1,4 +1,4 @@
-module WubTest
+module OrchWebTest
   def configure_upstream_server(name, port)
     template "#{node['nginx']['dir']}/sites-available/#{name}" do
       source       "upstream_vhost.erb"

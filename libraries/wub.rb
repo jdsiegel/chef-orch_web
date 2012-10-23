@@ -1,4 +1,4 @@
-module Wub
+module OrchWeb
   def configure_app(app)
     name      = app['name']
     servers   = app['servers']           || []

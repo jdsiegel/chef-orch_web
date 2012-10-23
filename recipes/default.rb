@@ -1,7 +1,7 @@
-include_recipe "chef-wub::nginx"
+include_recipe "orch_web::nginx"
 
-extend Wub
+extend OrchWeb
 
-node['wub']['apps'].each do |app|
+node['orch_web']['apps'].each do |app|
   configure_app(app)
 end

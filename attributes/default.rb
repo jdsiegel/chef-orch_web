@@ -1,1 +1,1 @@
-default['wub']['apps'] = []
+default['orch_web']['apps'] = []

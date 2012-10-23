@@ -1,6 +1,6 @@
-extend WubTest
+extend OrchWebTest
 
-include_recipe "chef-wub::nginx"
+include_recipe "orch_web::nginx"
 
 upstream_servers = [["upstream1", 8080], ["upstream2", 8081], ["upstream3", 8082], ["upstream4", 8083]]
 upstream_servers.each do |name, port|
@@ -10,7 +10,7 @@ end
 app1_servers = upstream_servers[0..1].map { |name, port| "localhost:#{port}" }
 app2_servers = upstream_servers[2..3].map { |name, port| "localhost:#{port}" }
 
-node.override['wub']['apps'] = [
+node.override['orch_web']['apps'] = [
   {
     'name' => 'app1',
     'root_path' => '/home/vagrant',
@@ -24,4 +24,4 @@ node.override['wub']['apps'] = [
   }
 ]
 
-include_recipe "chef-wub"
+include_recipe "orch_web"

@@ -5,7 +5,7 @@ platform :ubuntu do
   end
 end
 
-cookbook "chef-wub" do
+cookbook "orch_web" do
   configuration "default"
   configuration "ssl"
 end
