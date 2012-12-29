@@ -1,10 +1,32 @@
 GEM
   remote: http://rubygems.org/
   specs:
+    activemodel (3.2.9)
+      activesupport (= 3.2.9)
+      builder (~> 3.0.0)
+    activesupport (3.2.9)
+      i18n (~> 0.6)
+      multi_json (~> 1.0)
+    addressable (2.3.2)
     archive-tar-minitar (0.5.2)
-    builder (3.0.0)
+    berkshelf (1.1.0)
+      activesupport
+      chef (>= 10.16.2)
+      chozo (>= 0.2.3)
+      hashie
+      minitar
+      multi_json (>= 1.3.0)
+      ridley (>= 0.4.1)
+      solve (>= 0.4.0.rc1)
+      thor (~> 0.16.0)
+      vagrant (~> 1.0.5)
+      yajl-ruby
+    builder (3.0.4)
     bunny (0.7.9)
-    chef (10.14.4)
+    celluloid (0.12.4)
+      facter (>= 1.6.12)
+      timers (>= 1.0.0)
+    chef (10.16.2)
       bunny (>= 0.6.0, < 0.8.0)
       erubis
       highline (>= 1.6.9)
@@ -22,45 +44,33 @@ GEM
       treetop (~> 1.4.9)
       uuidtools
       yajl-ruby (~> 1.1)
-    childprocess (0.3.5)
+    childprocess (0.3.6)
       ffi (~> 1.0, >= 1.0.6)
-    coderay (0.9.8)
-    cucumber (1.1.8)
-      builder (>= 2.1.2)
-      diff-lcs (>= 1.1.2)
-      gherkin (~> 2.8.0)
-      json (>= 1.4.6)
-      term-ansicolor (>= 1.0.6)
-    diff-lcs (1.1.3)
+    chozo (0.2.3)
+      activesupport (>= 3.2.0)
+      hashie
+      multi_json (>= 1.3.0)
     erubis (2.7.0)
-    ffi (1.1.5)
-    foodcritic (1.4.0)
-      gherkin (~> 2.8.0)
-      gist (~> 2.0.4)
-      nokogiri (= 1.5.0)
-      pry (~> 0.9.7.4)
-      pry-doc (~> 0.3.0)
-      rak (~> 1.4)
-      treetop (~> 1.4.10)
-      yajl-ruby (~> 1.1.0)
-    gherkin (2.8.0)
-      json (>= 1.4.6)
-    gist (2.0.4)
-    hashr (0.0.22)
+    facter (1.6.16)
+    faraday (0.8.4)
+      multipart-post (~> 1.1)
+    ffi (1.2.0)
+    hashie (1.2.0)
     highline (1.6.15)
     i18n (0.6.1)
     ipaddress (0.8.0)
+    jamie (0.1.0.alpha17)
+      mixlib-shellout
+      net-scp
+      net-ssh
+      thor
+    jamie-vagrant (0.2.1)
+      jamie
+      vagrant (~> 1.0.5)
     json (1.5.4)
-    librarian (0.0.24)
-      archive-tar-minitar (>= 0.5.2)
-      chef (>= 0.10)
-      highline
-      thor (~> 0.15)
     log4r (1.1.10)
-    method_source (0.6.7)
-      ruby_parser (>= 2.3.1)
     mime-types (1.19)
-    minitest (3.0.1)
+    minitar (0.5.4)
     mixlib-authentication (1.3.0)
       mixlib-log
     mixlib-cli (1.2.2)
@@ -68,6 +78,8 @@ GEM
     mixlib-log (1.4.1)
     mixlib-shellout (1.1.0)
     moneta (0.6.0)
+    multi_json (1.4.0)
+    multipart-post (1.1.5)
     net-scp (1.0.4)
       net-ssh (>= 1.99.1)
     net-ssh (2.2.2)
@@ -76,7 +88,6 @@ GEM
     net-ssh-multi (1.1)
       net-ssh (>= 2.1.4)
       net-ssh-gateway (>= 0.99.0)
-    nokogiri (1.5.0)
     ohai (6.14.0)
       ipaddress
       mixlib-cli
@@ -85,33 +96,27 @@ GEM
       systemu
       yajl-ruby
     polyglot (0.3.3)
-    pry (0.9.7.4)
-      coderay (~> 0.9.8)
-      method_source (~> 0.6.7)
-      ruby_parser (>= 2.3.1)
-      slop (~> 2.1.0)
-    pry-doc (0.3.0)
-      pry (>= 0.9.0)
-      yard (>= 0.6.4)
-    rak (1.4)
     rest-client (1.6.7)
       mime-types (>= 1.16)
-    ruby_parser (2.3.1)
-      sexp_processor (~> 3.0)
-    sexp_processor (3.2.0)
-    slop (2.1.0)
+    ridley (0.5.2)
+      activemodel (>= 3.2.0)
+      activesupport (>= 3.2.0)
+      addressable
+      celluloid
+      chozo (>= 0.2.2)
+      erubis
+      faraday
+      json (>= 1.5.0)
+      mixlib-authentication
+      mixlib-log
+      multi_json (>= 1.0.4)
+      net-ssh
+    solve (0.4.0.rc1)
+      json
     systemu (2.5.2)
-    term-ansicolor (1.0.7)
-    test-kitchen (0.6.0)
-      foodcritic (~> 1.4)
-      hashr (~> 0.0.20)
-      highline (>= 1.6.9)
-      librarian (~> 0.0.20)
-      mixlib-cli (~> 1.2.2)
-      vagrant (~> 1.0.2)
-      yajl-ruby (~> 1.1.0)
     thor (0.16.0)
-    treetop (1.4.10)
+    timers (1.0.2)
+    treetop (1.4.12)
       polyglot
       polyglot (>= 0.3.1)
     uuidtools (2.1.3)
@@ -125,12 +130,11 @@ GEM
       net-scp (~> 1.0.4)
       net-ssh (~> 2.2.2)
     yajl-ruby (1.1.0)
-    yard (0.8.2.1)
 
 PLATFORMS
   ruby
 
 DEPENDENCIES
-  cucumber (~> 1.1.8)
-  minitest (~> 3.0.0)
-  test-kitchen
+  berkshelf
+  jamie
+  jamie-vagrant
