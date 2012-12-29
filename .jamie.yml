@@ -10,13 +10,19 @@ platforms:
 suites:
 - name: standard
   run_list:
+  - recipe[platform_packages]
   - recipe[test_setup]
   - recipe[orch_web]
   attributes:
-    orch_web:
+    platform_packages:
+      pkgs:
+        - name: curl
 - name: ssl
   run_list:
+  - recipe[platform_packages]
   - recipe[test_setup::ssl]
   - recipe[orch_web]
   attributes:
-    orch_web:
+    platform_packages:
+      pkgs:
+        - name: curl
