@@ -1,5 +1,7 @@
-.bundle
+Gemfile.lock
+Berksfile.lock
 bin
+.bundle
 .jamie/
 .jamie.local.yml
 .vagrant
