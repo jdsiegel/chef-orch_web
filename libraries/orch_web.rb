@@ -32,7 +32,7 @@ module OrchWeb
       #notifies     :restart, "service[nginx]"
     end
 
-    nginx_site "#{name}"
+    nginx_site name
 
     if app['ssl']
       ssl = app['ssl']
@@ -87,7 +87,7 @@ module OrchWeb
         notifies     :reload, "service[nginx]"
       end
 
-      nginx_site "#{ssl_name}"
+      nginx_site ssl_name
     end
   end
 end
