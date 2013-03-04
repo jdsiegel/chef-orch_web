@@ -8,7 +8,7 @@ server {
   server_name <%= @hostname %>;
   listen <%= @port %>;
 
-  root <%= @root_path %>/current/public;
+  root <%= @root_path %>;
 
 <% if @ssl_key && @ssl_cert -%>
   ssl on;

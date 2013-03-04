@@ -13,3 +13,10 @@ test_app_root_page_contains_nginx_default_markup()
 
   assertTrue "nginx markup was not found" $?
 }
+
+test_app_serves_static_files_from_root_path()
+{
+  local output=$(curl https://localhost/notes.txt --cacert /etc/nginx/ssl/sslapp.cert)
+
+  assertEquals "This should be served up" "$output"
+}

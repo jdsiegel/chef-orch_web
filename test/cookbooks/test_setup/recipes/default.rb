@@ -24,4 +24,11 @@ node.override['orch_web']['apps'] = [
   }
 ]
 
+file "/home/vagrant/notes.txt" do
+  owner   "vagrant"
+  group   "vagrant"
+  mode    "0644"
+  content "This should be served up"
+end
+
 include_recipe "orch_web"
