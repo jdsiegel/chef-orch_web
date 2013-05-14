@@ -52,25 +52,27 @@ module OrchWeb
       ssl_port      = ssl['port'] || 443
       ssl_name      = "#{name}_ssl"
 
-      directory ssl_dir do
-        owner "root"
-        mode  "0755"
-      end
+      if ssl_key
+        directory ssl_dir do
+          owner "root"
+          mode  "0755"
+        end
 
-      file ssl_key_file do
-        owner   "root"
-        mode    "0644"
-        content ssl_key if ssl_key
+        file ssl_key_file do
+          owner   "root"
+          mode    "0644"
+          content ssl_key
 
-        notifies     :reload, "service[nginx]"
-      end
+          notifies     :reload, "service[nginx]"
+        end
 
-      file ssl_cert_file do
-        owner   "root"
-        mode    "0644"
-        content ssl_cert if ssl_cert
+        file ssl_cert_file do
+          owner   "root"
+          mode    "0644"
+          content ssl_cert
 
-        notifies     :reload, "service[nginx]"
+          notifies     :reload, "service[nginx]"
+        end
       end
 
       template "#{node['nginx']['dir']}/sites-available/#{ssl_name}" do
