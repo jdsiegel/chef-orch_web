@@ -36,17 +36,21 @@ module OrchWeb
 
     if app['ssl']
       ssl = app['ssl']
+
+      ssl_dir       = "#{node['nginx']['dir']}/ssl"
       ssl_key  = ssl['key']
       ssl_cert = ssl['cert']
 
-      raise "App '#{name}' requires ssl key"  unless ssl_key
-      raise "App '#{name}' requires ssl cert" unless ssl_cert
+      ssl_key_file  = ssl['key_file']
+      ssl_cert_file = ssl['cert_file']
 
+      raise "App '#{name}' requires ssl key"  unless ssl_key || ssl_key_file
+      raise "App '#{name}' requires ssl cert" unless ssl_cert || ssl_cert_file
+
+      ssl_key_file  ||= "#{ssl_dir}/#{name}.key"
+      ssl_cert_file ||= "#{ssl_dir}/#{name}.cert"
       ssl_port      = ssl['port'] || 443
       ssl_name      = "#{name}_ssl"
-      ssl_dir       = "#{node['nginx']['dir']}/ssl"
-      ssl_key_file  = "#{ssl_dir}/#{name}.key"
-      ssl_cert_file = "#{ssl_dir}/#{name}.cert"
 
       directory ssl_dir do
         owner "root"
@@ -56,7 +60,7 @@ module OrchWeb
       file ssl_key_file do
         owner   "root"
         mode    "0644"
-        content ssl_key
+        content ssl_key if ssl_key
 
         notifies     :reload, "service[nginx]"
       end
@@ -64,7 +68,7 @@ module OrchWeb
       file ssl_cert_file do
         owner   "root"
         mode    "0644"
-        content ssl_cert
+        content ssl_cert if ssl_cert
 
         notifies     :reload, "service[nginx]"
       end

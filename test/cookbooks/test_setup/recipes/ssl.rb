@@ -19,6 +19,16 @@ node.override['orch_web']['apps'] = [
       'cert' => self_signed_ssl_cert
     }
   },
+  {
+    'name' => 'ssl_from_files',
+    'root_path' => '/home/vagrant',
+    'servers' => app_servers,
+    'ssl' => {
+      'key_file' => '/etc/nginx/ssl/ssl_from_file.key',
+      'cert_file' => '/etc/nginx/ssl/ssl_from_file.cert',
+      'port' => 444
+    }
+  },
 ]
 
 file "/home/vagrant/notes.txt" do
@@ -29,3 +39,22 @@ file "/home/vagrant/notes.txt" do
 end
 
 include_recipe "orch_web"
+
+key = self_signed_ssl_key
+cert = self_signed_ssl_cert
+
+file '/etc/nginx/ssl/ssl_from_file.key' do
+  owner    'root'
+  mode     '0644'
+  content  key
+
+  notifies :reload, "service[nginx]"
+end
+
+file '/etc/nginx/ssl/ssl_from_file.cert' do
+  owner    'root'
+  mode     '0644'
+  content  cert
+
+  notifies :reload, "service[nginx]"
+end
