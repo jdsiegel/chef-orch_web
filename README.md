@@ -52,6 +52,23 @@ following:
 * servers - a list of upstream server addresses (IP4/6 or unix socket)
 * port - the virtual host's listening port (default: 80)
 * hostname - the virtual host's hostname (default: \_)
+* ssl - ssl options hash (optional)
+  * port - the ssl port (default: 443)
+  * key - the ssl certificate key
+  * cert - the ssl certificate
+  * key\_file - the name of the key file to use (default:
+    /etc/nginx/ssl/<appname>.key)
+  * cert\_file - the name of the cert file to use (default:
+    /etc/nginx/ssl/<appname>.crt)
+
+## SSL Certificates
+
+The presence of the app's ssl['key'] and ssl['cert'] node attributes
+will enable SSL and install the key and certificate. For situations
+where it's not secure to pass certificate information as node
+attributes, you can explictly specify the key and cert files instead.
+The cookbook will assume the files already exist on the server and will
+use them in the nginx vhost configuration.
 
 ## External attribute changes
 
