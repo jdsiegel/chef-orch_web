@@ -66,7 +66,7 @@ This is set to false
 Usage
 =====
 
-* Add recipe[orch\_web] to the run list for your proxy node and set the the
+* Add recipe[orch\_web] to the run list for the node and set the the
   apps attribute.
 
 License and Author
@@ -74,7 +74,7 @@ License and Author
 
 - Author:: Jeff Siegel
 
-Copyright:: 2012 Jeff Siegel
+Copyright:: 2013 Jeff Siegel
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
