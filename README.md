@@ -57,9 +57,9 @@ following:
   * key - the ssl certificate key
   * cert - the ssl certificate
   * key\_file - the name of the key file to use (default:
-    /etc/nginx/ssl/<appname>.key)
+    /etc/nginx/ssl/appname.key)
   * cert\_file - the name of the cert file to use (default:
-    /etc/nginx/ssl/<appname>.crt)
+    /etc/nginx/ssl/appname.crt)
 
 ## SSL Certificates
 
