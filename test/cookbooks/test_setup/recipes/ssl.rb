@@ -25,7 +25,7 @@ node.override['orch_web']['apps'] = [
     'servers' => app_servers,
     'ssl' => {
       'key_file' => '/etc/ssl/ssl_from_file.key',
-      'cert_file' => '/etc/ssl/ssl_from_file.cert',
+      'cert_file' => '/etc/ssl/ssl_from_file.crt',
       'port' => 444
     }
   },
@@ -49,7 +49,7 @@ file '/etc/ssl/ssl_from_file.key' do
   notifies :reload, "service[nginx]"
 end
 
-file '/etc/ssl/ssl_from_file.cert' do
+file '/etc/ssl/ssl_from_file.crt' do
   owner    'root'
   mode     '0644'
   content  cert

@@ -48,7 +48,7 @@ module OrchWeb
       raise "App '#{name}' requires ssl cert" unless ssl_cert || ssl_cert_file
 
       ssl_key_file  ||= "#{ssl_dir}/#{name}.key"
-      ssl_cert_file ||= "#{ssl_dir}/#{name}.cert"
+      ssl_cert_file ||= "#{ssl_dir}/#{name}.crt"
       ssl_port      = ssl['port'] || 443
       ssl_name      = "#{name}_ssl"
 
