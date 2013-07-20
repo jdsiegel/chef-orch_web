@@ -36,7 +36,7 @@ server {
               @app;
   }
 
-  location ~ ^/(assets)/ {
+  location ~ ^/<%= @asset_location %>/ {
     gzip_static on;
     expires max;
     add_header Cache-Control public;

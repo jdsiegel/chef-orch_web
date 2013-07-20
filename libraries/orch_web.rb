@@ -7,6 +7,8 @@ module OrchWeb
     root_path = app['root_path']
     log_path  = node['nginx']['log_dir']
 
+    asset_location = app['asset_location'] || node['orch_web']['asset_location']
+
     raise "App requires a name" unless name
     raise "App '#{name}' requires a root path" unless root_path
     raise "App '#{name}' has an empty server list" if servers.empty?
@@ -18,18 +20,16 @@ module OrchWeb
       owner        "root"
       mode         "0644"
       variables({
-        name:      name,
-        servers:   servers,
-        hostname:  hostname,
-        port:      port,
-        root_path: root_path,
-        log_path:  log_path
+        name:           name,
+        servers:        servers,
+        hostname:       hostname,
+        port:           port,
+        root_path:      root_path,
+        log_path:       log_path,
+        asset_location: asset_location
       })
 
-      # doesn't work with nginx via runit. runit definition does not enable "reload" action
       notifies     :reload, "service[nginx]"
-
-      #notifies     :restart, "service[nginx]"
     end
 
     nginx_site name
@@ -80,14 +80,15 @@ module OrchWeb
         owner        "root"
         mode         "0644"
         variables({
-          name:      ssl_name,
-          servers:   servers,
-          hostname:  hostname,
-          port:      ssl_port,
-          root_path: root_path,
-          log_path:  log_path,
-          ssl_key:   ssl_key_file,
-          ssl_cert:  ssl_cert_file
+          name:           ssl_name,
+          servers:        servers,
+          hostname:       hostname,
+          port:           ssl_port,
+          root_path:      root_path,
+          log_path:       log_path,
+          ssl_key:        ssl_key_file,
+          ssl_cert:       ssl_cert_file,
+          asset_location: asset_location
         })
 
         notifies     :reload, "service[nginx]"

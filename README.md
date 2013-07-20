@@ -61,6 +61,12 @@ following:
   * cert\_file - the name of the cert file to use (default:
     /etc/nginx/ssl/appname.crt)
 
+### asset\_location
+
+The regex used to specify static assets that are cached indefinitely.
+Default is '(images|assets|javascripts|stylesheets)' for both Rails 2
+and 3 apps
+
 ## SSL Certificates
 
 The presence of the app's ssl['key'] and ssl['cert'] node attributes
