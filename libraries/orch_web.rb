@@ -37,7 +37,7 @@ module OrchWeb
     if app['ssl']
       ssl = app['ssl']
 
-      ssl_dir       = "#{node['nginx']['dir']}/ssl"
+      ssl_dir  = "#{node['nginx']['dir']}/ssl"
       ssl_key  = ssl['key']
       ssl_cert = ssl['cert']
 
