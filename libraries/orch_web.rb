@@ -40,6 +40,7 @@ module OrchWeb
       ssl_dir  = "#{node['nginx']['dir']}/ssl"
       ssl_key  = ssl['key']
       ssl_cert = ssl['cert']
+      ssl_ciphers = ssl.fetch('ciphers') { node['orch_web']['ssl_ciphers'] }
 
       ssl_key_file  = ssl['key_file']
       ssl_cert_file = ssl['cert_file']
@@ -88,6 +89,7 @@ module OrchWeb
           log_path:       log_path,
           ssl_key:        ssl_key_file,
           ssl_cert:       ssl_cert_file,
+          ssl_ciphers:    ssl_ciphers,
           asset_location: asset_location
         })
 
